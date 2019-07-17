@@ -1,28 +1,5 @@
-function [fusionElements, CRRsteps,meanCRRall] = fusion_algorithm_NEW(mahal_distance,Nel,Nsubj,Nruns,CRR)
+function [fusionElements, CRRsteps,meanCRRall] = fusion_algorithm(mahal_distance,Nel,Nsubj,Nruns,CRR)
 
-% Input:
-%   N: Number of subjevts
-%   Nruns number of cross-validation runs
-%   Nel: Number of elements
-
-% Output:
-%   fusionElemetns
-
-%%%%%%%%%%% Algorithm %%%%%%%%%%%%%%%%%
-
-% D,k,m(n)
-% CRR = zeros(Nel,Nruns);
-% for i=1:Nel
-%     for r=1:Nruns
-%         M = zeros(Nsubj, Nsubj);
-%         for m=1:Nsubj
-%             % index of minimum distance
-%             [~,index] = min(mahal_distance(i,m,:,r));
-%             M(m,index) = 1;
-%         end
-%         CRR(i,r) = sum(diag(M))/Nsubj;                    
-%     end
-% end
 mCRR = zeros(Nel,1);
 for i=1:Nel
     mCRR(i) = sum(CRR(i,:))/Nruns;

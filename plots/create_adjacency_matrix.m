@@ -11,4 +11,3 @@ function [adj] = create_adjacency_matrix(CRR,Nel)
     caxis([30 70])
     
 end
-% pcolor kai colorbar gia ta results pou tha valeis sti diplomatikara sou 

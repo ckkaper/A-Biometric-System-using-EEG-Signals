@@ -6,23 +6,18 @@ function [CRR, fusion, mahalanobis_distance,meanCRR] = DT_main(eyes_state, regio
     Nvalues = 40;                       % Values of each feature
 
     % Read dataset
-    switch eyes_state
-    case 'EO'
-        dataset = read_dataset_preprocessing_EO();
-    case 'EC'
-        dataset = read_dataset_preprocessing_EC();
-    end
+    dataset = read_dataset_preprocessing(eyes_state);
    
     % Decide what channels will be used to our experiment
     switch region
     case 'ALL'
         dataset = remove_unused_channels(dataset,Nsubj);
     case 'region_C'
-        dataset = remove_unused_channels_region_C(dataset,Nsubj);
+        dataset = remove_unused_channels_region(dataset,Nsubj,'C');
     case 'region_F'
-        dataset = remove_unused_channels_region_F(dataset,Nsubj);
+        dataset = remove_unused_channels_region(dataset,Nsubj,'F');
     case 'region_P'
-        dataset = remove_unused_channels_region_P(dataset,Nsubj);
+        dataset = remove_unused_channels_region(dataset,Nsubj,'P');
     case 'emotiv_epoc_plus'
         dataset = remove_unused_channels(dataset,Nsubj,'emotiv_epoc_plus');
     case 'emotiv_insight'
@@ -45,16 +40,13 @@ function [CRR, fusion, mahalanobis_distance,meanCRR] = DT_main(eyes_state, regio
         end
         [covariance_matrix] = covariance_calculation_PSD(extracted_feature, Nruns, Nsubj, Nel, Nvalues);
         [mahalanobis_distance,CRR] = mahalanobis_distance_calculation_PSD(extracted_feature, Nruns, Nsubj, Nel, Nvalues, covariance_matrix);
-        % mCRR = mean(CRR,2);
-        % [mCRRval,mCRRind] = sort(mCRR,1);
-        [fusion,CRRsteps,meanCRR] = fusion_algorithm_NEW(mahalanobis_distance,Nel,Nsubj,Nruns,CRR);
+        [fusion,CRRsteps,meanCRR] = fusion_algorithm(mahalanobis_distance,Nel,Nsubj,Nruns,CRR);
     case 'COH'
         Nel_comb = nchoosek(Nel,2);
         extracted_feature = zeros(Nruns, Nsubj, Nel_comb, Nvalues);
         for j=1:Nruns
             [extracted_feature(j,:,:,:)] = atanh(COH_feature_extraction(squeeze(dataset(j,:,:,:)), Nsubj, Nel, Nvalues)); 
         end
-        mean_COH = mean(extracted_feature);
         CRR = zeros(Nel_comb,Nruns);
         mahalanobis_distance = zeros(Nel_comb,Nsubj,Nsubj,Nruns);
          for j=1:Nruns
@@ -62,6 +54,6 @@ function [CRR, fusion, mahalanobis_distance,meanCRR] = DT_main(eyes_state, regio
              [mahalanobis_distance(:,:,:,j),CRR(:,j)] = mahalanobis_distance_calculation_COH(extracted_feature, Nruns, Nsubj, Nel_comb, Nvalues, covariance_matrix,j);
          end 
          
-        [fusion,CRRsteps,meanCRR] = fusion_algorithm_NEW(mahalanobis_distance,Nel_comb,Nsubj,Nruns,CRR);
+        [fusion,CRRsteps,meanCRR] = fusion_algorithm(mahalanobis_distance,Nel_comb,Nsubj,Nruns,CRR);
     end
 end
