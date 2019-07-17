@@ -1,9 +1,6 @@
 function [mahalanobis_distance,CRR] = mahalanobis_distance_calculation_COH(COH, Nruns, Nsubj, Nel, Nvalues, covariance_matrix,run)
-    %pooled_covariance_matrix = zeros(Nruns,109,40,40);
-    % matrix condition estimation
-    % condition_of_covariance = zeros(6,109);    
-    %----------------------------------------
     m_class = zeros(Nruns,Nel,Nsubj,Nvalues);    
+    
         for s=1:Nsubj
             for e=1:Nel
                 a = COH(:,s,e,:);               
@@ -13,9 +10,8 @@ function [mahalanobis_distance,CRR] = mahalanobis_distance_calculation_COH(COH, 
         end
     
     mahalanobis_distance = zeros(Nel,Nsubj,Nsubj);
-    %----------------------------------------
-    % Calculate Mahalanobis distances
     CRR = zeros(1,Nel);
+
     for e=1:Nel        
             M = zeros(Nsubj,Nsubj);
             for m=1:Nsubj

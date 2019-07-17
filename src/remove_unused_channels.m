@@ -1,8 +1,4 @@
 function output = remove_unused_channels(dataset,N,device)
-    %--------------------------------------------
-    % Input: Complete dataset for every subject
-    % Output: Complete dataset with removed unecessary channels
-    %--------------------------------------------
     switch device
     case 'ALL'
         channels = [1:24,26:28,30:38,41:42,45:61,63:63];

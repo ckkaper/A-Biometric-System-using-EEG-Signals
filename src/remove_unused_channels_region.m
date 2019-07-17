@@ -1,8 +1,4 @@
 function output = remove_unused_channels_region(dataset,N,region)
-    %-------------------------------------------
-    % Input: Complete dataset for every subject
-    % Output: Complete dataset with removed unecessary channels
-    %--------------------------------------------
     output = zeros(N,24,6000); 
     switch region
     case 'C'

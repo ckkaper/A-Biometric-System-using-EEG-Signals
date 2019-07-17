@@ -1,11 +1,9 @@
 function [CRR, fusion, mahalanobis_distance,meanCRR] = DT_main(eyes_state, region, feature_method )
     
-    % Experiment details
     Nruns = 6;                          % Number of runs
     Nsubj = 109;                        % Number of subjects 
     Nvalues = 40;                       % Values of each feature
 
-    % Read dataset
     dataset = read_dataset_preprocessing(eyes_state);
    
     % Decide what channels will be used to our experiment

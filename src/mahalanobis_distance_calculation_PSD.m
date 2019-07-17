@@ -1,12 +1,6 @@
 function [mahalanobis_distance,CRR] = mahalanobis_distance_calculation_PSD(PSD,Nruns, Nsubj, Nel, Nvalues, covariance_matrix)
-    
-    
-    % matrix condition estimation
-    % condition_of_covariance = zeros(6,109);    
-    %----------------------------------------
     m_class = zeros(Nruns,Nel,Nsubj,Nvalues);
     
-    % find the mean of each class (its the mean to be substracted)
     for r=1:Nruns
         for s=1:Nsubj
             for e=1:Nel
@@ -19,8 +13,6 @@ function [mahalanobis_distance,CRR] = mahalanobis_distance_calculation_PSD(PSD,N
     end
     
     mahalanobis_distance = zeros(Nel,Nsubj,Nsubj,Nruns);
-    %----------------------------------------
-    % Calculate Mahalanobis distances
     CRR = zeros(Nel, Nruns);
     for e=1:Nel        
         for r=1:Nruns
