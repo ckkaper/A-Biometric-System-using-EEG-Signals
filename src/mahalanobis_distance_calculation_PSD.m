@@ -6,21 +6,26 @@ size(PSD)
 disp("covariance_matrix")
 size(covariance_matrix)
 % Description:
-% This function firstly finds all the combinations for every available channel in 
-% the brain and then computes their spectral coherence for frequencies [1 - 40] Hz. 
+% This function calculates the mahalanobis distances in the case of 
+% Power Spectral Density. 
 %
 % Use:
 % [pathRows, pathCols, el] = COH_feature_extraction(dataset, Nsubj, Nel, Nvalues)
 %
 % Inputs: 
+%      PSD    : The PSD feature extraction 
 %      dataset: The preprocessed dataset 
 %               Size: Nsubj x Nel x Nvalues
+%      Nruns  : Number of runs
+%               Size: Number of runs
 %      Nsubj  : The number of subjects 
 %               Size: scalar
 %      Nel    : Number of available channels
 %               Size: scalar
-%      Nvalues: Number of observations for each channel (or else signal size)
-%               Size: scalar
+%      Nvalues          : Number of observations for each channel (or else signal size)
+%                         Size: scalar
+%      covariance_matrix: The pooled covariance matrix obtained by the training epochs of each class
+%                         Size: 
 % Outputs: 
 %      coherence: The coherence between every channel for every subject
 %                 Size: Nsubj x combos_size x Nvalues

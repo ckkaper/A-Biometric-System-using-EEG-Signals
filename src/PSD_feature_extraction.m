@@ -5,11 +5,10 @@ disp("dataset");
 size(dataset)
 
 % Description:
-% This function firstly finds all the combinations for every available channel in 
-% the brain and then computes their spectral coherence for frequencies [1 - 40] Hz. 
+% This function computes the power spectral density to all channels for every subject on each run  
 %
 % Use:
-% [pathRows, pathCols, el] = COH_feature_extraction(dataset, Nsubj, Nel, Nvalues)
+% [PSD_feature] = PSD_feature_extraction(dataset, Nsubj, Nel, Nvalues)
 %
 % Inputs: 
 %      dataset: The preprocessed dataset 
@@ -21,7 +20,7 @@ size(dataset)
 %      Nvalues: Number of observations for each channel (or else signal size)
 %               Size: scalar
 % Outputs: 
-%      coherence: The coherence between every channel for every subject
+%      feature_vector: The power spectral density between coherence between every channel for every subject
 %                 Size: Nsubj x combos_size x Nvalues
 %
 % Author: Kyriakos Kaperonis

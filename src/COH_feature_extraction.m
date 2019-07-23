@@ -24,7 +24,7 @@ size(dataset)
 %                 Size: Nsubj x combos_size x Nvalues
 %
 % Author: Kyriakos Kaperonis
-%         Signal processing & Communications 
+%         Signal processing & Communications Lab 
 %         Department of Computer Engineering & Informatics 
 %         University of Patras
   combinations = nchoosek(Nel,2);     

@@ -1,24 +1,22 @@
-function output = remove_unused_channels(dataset,N,device)
+function output = remove_unused_channels(dataset,Nsubj,device)
 %
 % Description:
-% This function firstly finds all the combinations for every available channel in 
-% the brain and then computes their spectral coherence for frequencies [1 - 40] Hz. 
+% This function discards unused channels according to the divice topology
+% is selected in the parameters
 %
 % Use:
-% [pathRows, pathCols, el] = COH_feature_extraction(dataset, Nsubj, Nel, Nvalues)
+% [output] = remove_unsused_channels(dataset, Nsubj, Nel, Nvalues)
 %
 % Inputs: 
-%      dataset: The preprocessed dataset 
+%      dataset: The preprocessed dataset
 %               Size: Nsubj x Nel x Nvalues
 %      Nsubj  : The number of subjects 
 %               Size: scalar
-%      Nel    : Number of available channels
-%               Size: scalar
-%      Nvalues: Number of observations for each channel (or else signal size)
-%               Size: scalar
+%      device : A string that difines the device topology
+%               Size: string
 % Outputs: 
-%      coherence: The coherence between every channel for every subject
-%                 Size: Nsubj x combos_size x Nvalues
+%      output: The input dataset after unused channels are removed
+%              Size: Nsubj x combos_size x Nvalues
 %
 % Author: Kyriakos Kaperonis
 %         Signal processing & Communications 
@@ -34,8 +32,8 @@ function output = remove_unused_channels(dataset,N,device)
     case 'emotiv_epoc_flex'
         channels = [22,24,27,30,32,34,36,38,40,7,5,3,1,39,41,9,11,13,42,45,46,47,49,51,53,55,61,62,63];
     end
-    output = zeros(N,max(size(channels)),6000); 
-    for i=1:N        
+    output = zeros(Nsubj,max(size(channels)),6000); 
+    for i=1:Nsubj
         output(i,:,:) = dataset(i,channels,:);  
     end
     size(output)

@@ -8,11 +8,11 @@ size(COH_mean)
 disp("run")
 size(run)
 % Description:
-% This function firstly finds all the combinations for every available channel in 
-% the brain and then computes their spectral coherence for frequencies [1 - 40] Hz. 
+% This function computes the pooled covariance matrix of every class (subject) for the feature 
+% of spectral coherence 
 %
 % Use:
-% [pathRows, pathCols, el] = COH_feature_extraction(dataset, Nsubj, Nel, Nvalues)
+% [covariance_m] = covariance_calculation_COH(COH, Nruns, Nsubj, Nel, Nvalues, COH_mean, run)
 %
 % Inputs: 
 %      COH    : The COH feature extracted 

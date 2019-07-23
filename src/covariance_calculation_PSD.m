@@ -5,8 +5,8 @@ disp("PSD");
 size(PSD)
 
 % Description:
-% This function firstly finds all the combinations for every available channel in 
-% the brain and then computes their spectral coherence for frequencies [1 - 40] Hz. 
+% This function computes the pooled covariance matrix of every class (subject) for the feature 
+% of Power Spectral Density. 
 %
 % Use:
 % [pathRows, pathCols, el] = COH_feature_extraction(dataset, Nsubj, Nel, Nvalues)

@@ -1,25 +1,28 @@
 function [CRR, fusion, mahalanobis_distance,meanCRR] = DT_main(eyes_state, region, feature_method )
 %
 % Description:
-% This function firstly finds all the combinations for every available channel in 
-% the brain and then computes their spectral coherence for frequencies [1 - 40] Hz. 
+% This function orchistrates the whole experiment, it takes as arguments the experiment 
+% parameteres and produces the additional output. 
 %
 % Use:
 % [pathRows, pathCols, el] = COH_feature_extraction(dataset, Nsubj, Nel, Nvalues)
 %
 % Inputs: 
-%      dataset: The preprocessed dataset 
-%               Size: Nsubj x Nel x Nvalues
-%      Nsubj  : The number of subjects 
-%               Size: scalar
-%      Nel    : Number of available channels
-%               Size: scalar
-%      Nvalues: Number of observations for each channel (or else signal size)
-%               Size: scalar
+%      eyes_state     : string that represents eye state (EO, EC) 
+%                       Size: Nsubj x Nel x Nvalues
+%      region         : string that represents region (F, C or P) 
+%                       Size: scalar
+%      feature_method : string that represents feature method (PSD or COH)
+%                       Size: scalar
 % Outputs: 
-%      coherence: The coherence between every channel for every subject
-%                 Size: Nsubj x combos_size x Nvalues
-%
+%      CRR                   : The correct recognition rate for each subject and every run
+%                              Size: Nsubj x Nruns
+%      fusion                : A vector with channels fused by fusion algorithm
+%                              Size: Vector        
+%      mahalanobis_distance  : The mahalanobis distance between each subject and each run for every class
+%                              Size: Nel x Nsubj x Nsubj
+%      meanCRR               : The CRR obtained from future algorithms
+%                              Size: Scalar
 % Author: Kyriakos Kaperonis
 %         Signal processing & Communications 
 %         Department of Computer Engineering & Informatics 

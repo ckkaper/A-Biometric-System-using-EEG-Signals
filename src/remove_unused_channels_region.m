@@ -1,24 +1,20 @@
 function output = remove_unused_channels_region(dataset,N,region)
 %
 % Description:
-% This function firstly finds all the combinations for every available channel in 
-% the brain and then computes their spectral coherence for frequencies [1 - 40] Hz. 
+% This function discards unused channels according region defined in parameters 
 %
 % Use:
-% [pathRows, pathCols, el] = COH_feature_extraction(dataset, Nsubj, Nel, Nvalues)
+% [pathRows, pathCols, el] = remove_unused_channels_region(dataset, 109, 'C')
 %
 % Inputs: 
 %      dataset: The preprocessed dataset 
 %               Size: Nsubj x Nel x Nvalues
 %      Nsubj  : The number of subjects 
 %               Size: scalar
-%      Nel    : Number of available channels
-%               Size: scalar
-%      Nvalues: Number of observations for each channel (or else signal size)
-%               Size: scalar
+%      region : A string that describes the brain region 'F' 'C' or 'P'
 % Outputs: 
-%      coherence: The coherence between every channel for every subject
-%                 Size: Nsubj x combos_size x Nvalues
+%      output : The input dataset with removed channels according to brain regions
+%               Size: Nsubj x combos_size x Nvalues
 %
 % Author: Kyriakos Kaperonis
 %         Signal processing & Communications 

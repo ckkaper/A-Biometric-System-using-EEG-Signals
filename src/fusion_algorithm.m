@@ -1,4 +1,4 @@
-function [fusionElements, CRRsteps,meanCRRall] = fusion_algorithm(mahal_distance,Nel,Nsubj,Nruns,CRR)
+function [fusionElements, fusionSteps, meanCRRall] = fusion_algorithm(mahal_distance,Nel,Nsubj,Nruns,CRR)
 disp("fusion_algorithm")
 disp("mahal_distance")
 size(mahal_distance)
@@ -7,24 +7,30 @@ size(CRR)
 
 %
 % Description:
-% This function firstly finds all the combinations for every available channel in 
-% the brain and then computes their spectral coherence for frequencies [1 - 40] Hz. 
+% This function impelments the fusion algorithm that selects 
+% the most distinctive channels for every subject
 %
 % Use:
-% [pathRows, pathCols, el] = COH_feature_extraction(dataset, Nsubj, Nel, Nvalues)
+% [fusionElements, fusionSteps, meanCRRall] = fusion_algorithm(mahal_distance, Nel, Nsubj, Nruns, CRR)
 %
 % Inputs: 
-%      dataset: The preprocessed dataset 
-%               Size: Nsubj x Nel x Nvalues
-%      Nsubj  : The number of subjects 
-%               Size: scalar
+%      mahal_distance: The mahalanobis distances for between each subject and every class 
+%               Size: -
 %      Nel    : Number of available channels
+%               Size: scalar
+%      Nsubj  : The number of subjects 
 %               Size: scalar
 %      Nvalues: Number of observations for each channel (or else signal size)
 %               Size: scalar
+%      Nruns  : number of runs
+%               Size: scalar
 % Outputs: 
-%      coherence: The coherence between every channel for every subject
-%                 Size: Nsubj x combos_size x Nvalues
+%      fusionElements : A set of the most distinctive channels
+%                       Size: Vector
+%      fusionSteps    : The number of steps the algorithm run in order to retrieve the most distinctive channels
+%                       Size: Scalar
+%      meanCRRall     : The mean CRR of fusioned values achieved
+%                       Size: Scalar
 %
 % Author: Kyriakos Kaperonis
 %         Signal processing & Communications 
@@ -65,7 +71,7 @@ for s=2:Nel
     if (meanCRRall > CRRsteps)
         fusionElements = B;
         cs = cs + 1;
-        CRRsteps = meanCRRall;
+        fusionSteps = cs;
     end
 end
 end
